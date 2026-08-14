@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// validation ; avi@gmail -> invalid gmail 
+
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -8,6 +10,8 @@ const userSchema = new mongoose.Schema({
 
     age:{
         type:Number,
+        min:10,
+        max:100
     },
 
     email:{

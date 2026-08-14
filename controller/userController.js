@@ -1,6 +1,7 @@
 import User from "userSchema.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import {signupSchmea,loginSchema} from "../validators/userValidators.js"
 
 
 const createToken = (id,email)=>{
@@ -22,13 +23,16 @@ const cookiesOption = {
 export const signup = async (req,res)=>{
     try{
 
-        const {name,age,email,password}=req.body
+        const result = signupSchmea.safeParse(req.body);
 
-        if(!email || !password || !name){
-            return res.json({
-                message: "Email, password or name some field are missing"
+        if(!result.success){
+            return res.status(400).json({
+                message:result.error.issues[0].message
             })
         }
+
+        const {name,age,email,password}=result.data;
+
 
         const user = await User.findOne({email});
         if(user){
