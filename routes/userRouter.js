@@ -9,5 +9,6 @@ userRouter.post("/login",login);
 userRouter.post("/logout",logout);
 userRouter.post("/signup",signup);
 userRouter.get("/profile",authUserMiddleware,profile);
+userRouter.profile("/delete",authUserMiddleware,deleteAccount);
 
 export default userRouter;

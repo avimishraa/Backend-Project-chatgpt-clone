@@ -2,6 +2,7 @@ import User from "userSchema.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import {signupSchema,loginSchema} from "../validators/userValidators.js"
+import Chat from "../model/chatSchema.js";
 
 
 const createToken = (id,email)=>{
@@ -185,5 +186,37 @@ export const profie = async(req,res)=>{
         res.status(500).json({
             message: "Internal Server error"
         })
+    }
+}
+
+export const deleteAccount = async(req,res)=>{
+    try {
+        
+        const userId = req.user._id;
+        await Message.deleteMany({
+            userId
+        })
+
+        await Chat.deleteMany({
+            userId
+        })
+
+        await User.deleteOne({
+            _id:userId
+        })
+
+        res.clearCookie("token",{
+            httpOnly:true,
+            secure:false,
+        })
+
+        res.status(200).json({
+            message:"Account delete successfully"
+        })
+    } catch (err) {
+        res.status(500).json({
+            messages:"Internal Server Error"
+        })
+        
     }
 }
