@@ -1,8 +1,9 @@
-import User from "userSchema.js";
+import User from "../model/userSchema.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import {signupSchema,loginSchema} from "../validators/userValidators.js"
 import Chat from "../model/chatSchema.js";
+import Message from "../model/messageSchema.js"
 
 
 const createToken = (id,email)=>{
@@ -10,7 +11,7 @@ const createToken = (id,email)=>{
         throw new Error("jwt secret key is missing");
     }
 
-    const token = jwt.sign({id,email}, process.env.JWT_SECRET,{expires:"1h"});
+    const token = jwt.sign({id,email}, process.env.JWT_SECRET,{expiresIn:"1h"});
     return token;
 }
 
@@ -81,6 +82,8 @@ export const login = async (req,res)=>{
                 message:result.error.issues[0].message
             })
         }
+
+        const {email, password} = result.data;
 
         const existingUser  = await User.findOne({email});
 
@@ -168,7 +171,7 @@ export const logout =  async (req,res)=>{
 //     }
 // }
 
-export const profie = async(req,res)=>{
+export const profile = async(req,res)=>{
     try{
         // profile ki informat send karo
         // Database ke andar call kari padegi, us user ko search, _id, email

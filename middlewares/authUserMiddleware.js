@@ -7,6 +7,12 @@ const authUserMiddleware= async (req,res,next)=>{
     try {
         
         const {token} = req.cookies;
+
+        if(!token){
+            res.status(401).json({
+                message:"You need to login first"
+            })
+        }
         const payload = jwt.verify(token,process.env.JWT_SECRET);
 
         const existingUser = await User.findById(payload.id)
@@ -17,13 +23,16 @@ const authUserMiddleware= async (req,res,next)=>{
             })
         }
 
+        req.user=existingUser;
         next();
 
-    } catch (error) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
-            message:"not exist"
+            message:"internal server error"
         })
         
     }
 }
+
+export default authUserMiddleware;

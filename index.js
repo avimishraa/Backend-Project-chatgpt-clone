@@ -1,9 +1,9 @@
 import express from "express";
-import connectDB from "./config/database";
+import connectDB from "../ChatGpt Backend Project/config/database.js";
 import dotenv from "dotenv";
-import chatRouter from "./routes/chatRouter.js";
-import userRouter from "./routes/userRouter.js"
-import messageRouter from "./router/messageRouter.js"
+import chatRouter from "../ChatGpt Backend Project/routes/chatRouter.js";
+import userRouter from "../ChatGpt Backend Project/routes/userRouter.js"
+import messageRouter from "../ChatGpt Backend Project/routes/messageRouter.js"
 import cookieParser from "cookie-parser";
 
 

@@ -9,8 +9,8 @@ export const signupSchema = z.object({
     age:
     z.number()
     .min(10,"minimum age should be 10")
-    .max(100,"maximum age should be 100")
-    .optional(),
+    .max(100,"maximum age should be 100"),
+    // .optional(),
     email:
     z.preprocess(
         (value)=> typeof value=="string"? value.trim().toLowerCase():"",
