@@ -108,31 +108,6 @@ OpenRouter API
 AI Response
 ```
 
-## 🏗️ Architecture
-
-The application follows a modular backend architecture:
-
-```text
-Client
-  │
-  ▼
-Routes
-  │
-  ▼
-Middlewares
-  │
-  ▼
-Controllers
-  │
-  ├──────────────► Services ──────────► OpenRouter API
-  │
-  ▼
-Models
-  │
-  ▼
-MongoDB
-```
-
 ### Routes
 
 Responsible for defining API endpoints and connecting them to the appropriate controllers.
