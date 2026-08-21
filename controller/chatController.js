@@ -29,7 +29,6 @@ export const getRecentChat = async(req,res)=>{
 
 export const getSingleChat = async(req,res)=>{
     try{
-          
         const {chatId} = req.params;
 
         const chat = await Chat.findOne({_id:chatId, userId: req.user._id});

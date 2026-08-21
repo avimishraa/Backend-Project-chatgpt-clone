@@ -1,14 +1,13 @@
 import express from "express";
 import connectDB from "../ChatGpt Backend Project/config/database.js";
-import dotenv from "dotenv";
+import "dotenv/config";
 import chatRouter from "../ChatGpt Backend Project/routes/chatRouter.js";
 import userRouter from "../ChatGpt Backend Project/routes/userRouter.js"
 import messageRouter from "../ChatGpt Backend Project/routes/messageRouter.js"
 import cookieParser from "cookie-parser";
 
 
-
-dotenv.config();
+// console.log(process.env.OPENROUTER_API_KEY ? "API key loaded" : "API key NOT loaded");
 
 const app=express();
 
